@@ -10,7 +10,7 @@ You can can open Ghost to manage your redis instance here:
 
     https://[CI_CD_DOMAIN]/ghost/
     Login: [ADMIN_EMAIL] (set in env var)
-    password: [ADMIN_PASSWORD] (set in env var)
+    password: [ADMIN_PASSWORD] (set in env var)
 
 
 # Documentation
