@@ -2,6 +2,7 @@ version: '3'
 services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.8
+    restart: always
     volumes:
       - './mariadb_data:/bitnami/mariadb'
     environment:
@@ -11,6 +12,7 @@ services:
       - MARIADB_DATABASE=bitnami_ghost
   ghost:
     image: docker.io/bitnami/ghost:${SOFTWARE_VERSION_TAG}
+    restart: always
     ports:
       - '172.17.0.1:2368:2368'
     volumes:
