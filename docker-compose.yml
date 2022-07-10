@@ -1,0 +1,33 @@
+version: '3'
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.8
+    volumes:
+      - './mariadb_data:/bitnami/mariadb'
+    environment:
+      - MARIADB_USER=bn_ghost
+      - MARIADB_ROOT_PASSWORD=${SOFTWARE_PASSWORD}
+      - MARIADB_PASSWORD=${SOFTWARE_PASSWORD}
+      - MARIADB_DATABASE=bitnami_ghost
+  ghost:
+    image: docker.io/bitnami/ghost:${SOFTWARE_VERSION_TAG}
+    ports:
+      - '172.17.0.1:2368:2368'
+    volumes:
+      - './ghost_data:/bitnami/ghost'
+    depends_on:
+      - mariadb
+    environment:
+      - url=https://[DOMAIN]
+      - GHOST_HOST=[DOMAIN]
+      - GHOST_DATABASE_HOST=mariadb
+      - GHOST_DATABASE_PORT_NUMBER=3306
+      - GHOST_DATABASE_USER=bn_ghost
+      - GHOST_DATABASE_PASSWORD=${ADMIN_PASSWORD}
+      - GHOST_DATABASE_NAME=bitnami_ghost
+      - GHOST_USERNAME=${ADMIN_EMAIL}
+      - GHOST_PASSWORD=${ADMIN_PASSWORD}
+      - GHOST_EMAIL=${ADMIN_EMAIL}
+      - GHOST_SMTP_HOST=172.17.0.1
+      - GHOST_SMTP_PORT=25
+      - GHOST_SMTP_FROM_ADDRESS=[DOMAIN]@vm.elestio.app
