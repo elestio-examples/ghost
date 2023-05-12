@@ -1,15 +1,15 @@
 version: '3'
 services:
-  mariadb:
-    image: docker.io/bitnami/mariadb:10.8
+  mysql:
+    image: docker.io/bitnami/mysql
     restart: always
     volumes:
-      - './mariadb_data:/bitnami/mariadb'
+      - './mysql_data:/bitnami/mysql'
     environment:
-      - MARIADB_USER=bn_ghost
-      - MARIADB_ROOT_PASSWORD=${SOFTWARE_PASSWORD}
-      - MARIADB_PASSWORD=${SOFTWARE_PASSWORD}
-      - MARIADB_DATABASE=bitnami_ghost
+      - MYSQL_USER=bn_ghost
+      - MYSQL_ROOT_PASSWORD=${SOFTWARE_PASSWORD}
+      - MYSQL_PASSWORD=${SOFTWARE_PASSWORD}
+      - MYSQL_DATABASE=bitnami_ghost
   ghost:
     image: docker.io/bitnami/ghost:${SOFTWARE_VERSION_TAG}
     restart: always
@@ -18,11 +18,11 @@ services:
     volumes:
       - './ghost_data:/bitnami/ghost'
     depends_on:
-      - mariadb
+      - mysql
     environment:
       - url=https://[DOMAIN]
       - GHOST_HOST=[DOMAIN]
-      - GHOST_DATABASE_HOST=mariadb
+      - GHOST_DATABASE_HOST=mysql
       - GHOST_DATABASE_PORT_NUMBER=3306
       - GHOST_DATABASE_USER=bn_ghost
       - GHOST_DATABASE_PASSWORD=${ADMIN_PASSWORD}
