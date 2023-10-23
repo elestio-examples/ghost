@@ -1,35 +1,32 @@
-version: '3.3'
+version: '3.1'
+
 services:
-  mysql:
-    image: docker.io/bitnami/mysql
-    restart: always
-    volumes:
-      - './mysql_data:/bitnami/mysql'
-    environment:
-      - MYSQL_USER=bn_ghost
-      - MYSQL_ROOT_PASSWORD=${SOFTWARE_PASSWORD}
-      - MYSQL_PASSWORD=${SOFTWARE_PASSWORD}
-      - MYSQL_DATABASE=bitnami_ghost
+
   ghost:
     image: elestio4test/ghost:${SOFTWARE_VERSION_TAG}
     restart: always
     ports:
-      - '172.17.0.1:2368:2368'
-    volumes:
-      - './ghost_data:/bitnami/ghost'
-    depends_on:
-      - mysql
+      - 172.17.0.1:2368:2368
     environment:
-      - url=https://[DOMAIN]
-      - GHOST_HOST=[DOMAIN]
-      - GHOST_DATABASE_HOST=mysql
-      - GHOST_DATABASE_PORT_NUMBER=3306
-      - GHOST_DATABASE_USER=bn_ghost
-      - GHOST_DATABASE_PASSWORD=${ADMIN_PASSWORD}
-      - GHOST_DATABASE_NAME=bitnami_ghost
+      # see https://ghost.org/docs/config/#configuration-options
+      - database__client=mysql
+      - database__connection__host=db
+      - database__connection__user=root
+      - database__connection__password=${ADMIN_PASSWORD}
+      - database__connection__database=ghost
       - GHOST_USERNAME=${ADMIN_EMAIL}
       - GHOST_PASSWORD=${ADMIN_PASSWORD}
       - GHOST_EMAIL=${ADMIN_EMAIL}
       - GHOST_SMTP_HOST=172.17.0.1
       - GHOST_SMTP_PORT=25
       - GHOST_SMTP_FROM_ADDRESS=[DOMAIN]@vm.elestio.app
+      # this url value is just an example, and is likely wrong for your environment!
+      - http://localhost:8080
+      # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
+      #NODE_ENV: development
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ADMIN_PASSWORD}
