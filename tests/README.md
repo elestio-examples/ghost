@@ -8,13 +8,13 @@
 
 # Ghost, verified and packaged by Elestio
 
-[Ghost](https://github.com/TryGhost/Ghost)Ghost is a powerful app for new-media creators to publish, share, and grow a business around their content.
+[Ghost](https://github.com/TryGhost/Ghost) is a powerful app for new-media creators to publish, share, and grow a business around their content.
 
-<img src="https://github.com/elestio-examples/ghost/raw/master/screenshot.png" alt="plane" width="800">
+<img src="https://github.com/elestio-examples/ghost/raw/master/screenshot.png" alt="ghost" width="800">
 
 Deploy a <a target="_blank" href="https://elest.io/open-source/ghost">fully managed Ghost</a> on <a target="_blank" href="https://elest.io/">elest.io</a> Ghost is a powerful app for new-media creators to publish, share, and grow a business around their content.
 
-[![deploy](https://github.com/elestio-examples/ghost/raw/main/deploy-on-elestio.png)](https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/ghost)
+[![deploy](https://github.com/elestio-examples/ghost/raw/master/deploy-on-elestio.png)](https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/ghost)
 
 # Why use Elestio images?
 

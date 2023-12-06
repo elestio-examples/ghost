@@ -8,7 +8,6 @@ services:
     ports:
       - 172.17.0.1:2368:2368
     environment:
-      # see https://ghost.org/docs/config/#configuration-options
       - database__client=mysql
       - database__connection__host=db
       - database__connection__user=root
@@ -20,10 +19,7 @@ services:
       - GHOST_SMTP_HOST=172.17.0.1
       - GHOST_SMTP_PORT=25
       - GHOST_SMTP_FROM_ADDRESS=[DOMAIN]@vm.elestio.app
-      # this url value is just an example, and is likely wrong for your environment!
       - http://localhost:8080
-      # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
-      #NODE_ENV: development
 
   db:
     image: mysql:8.0
